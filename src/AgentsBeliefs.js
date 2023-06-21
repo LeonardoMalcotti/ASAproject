@@ -4,6 +4,7 @@
  */
 let agent_data = [{}]
 
+
 /**
  * retrieve all the current beliefs on agents.
  * @returns {[{id: string, name: string, position: { x: number, y: number }, score: number}]}
@@ -11,6 +12,7 @@ let agent_data = [{}]
 function getAllAgentsBeliefs() {
     return agent_data;
 }
+
 
 /**
  *  update the beliefs of the agents passed as parameter.
@@ -26,6 +28,7 @@ function updateAgentsBeliefs(agents){
         updateAgentBeliefs(agents[i]);
     }
 }
+
 
 /**
  *  update the beliefs of a single agent passed as parameter.
@@ -48,6 +51,7 @@ function updateAgentBeliefs(agent){
     agent_data[i].score = agent.score;
 }
 
+
 /**
  *  add the beliefs for a new agent passed as parameter.
  *  @param {{id: string, name: string, x: number, y: number, score: number}} agent
@@ -63,6 +67,7 @@ function setAgentBeliefs(agent) {
         score : agent.score
     })
 }
+
 
 export default {
     getAllAgentsBeliefs,

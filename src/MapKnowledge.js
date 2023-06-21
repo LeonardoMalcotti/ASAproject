@@ -25,7 +25,7 @@ function getMapKnowledge() {
  * @param {{x:number, y:number, delivery:boolean}[]} tiles
  */
 function initializeMapKnowledge(width, height, tiles) {
-    if(map_data != null){
+    if(map_data !== null){
         console.log("Map already initialized.");
         return;
     }
@@ -33,28 +33,15 @@ function initializeMapKnowledge(width, height, tiles) {
     width_data = width;
     height_data = height;
 
-    let i;
-
     // so, fill() it's terrible to create a multidimensional array
     // https://stackoverflow.com/questions/9979560/javascript-multidimensional-array-updating-specific-element
 
     // initialize the matrix using width and height
-    map_data = new Array(height);
+    map_data = new Array(height).map(() => new Array(width).map(() => "x"));
 
-    for(i = 0; i< height; i++){
-        map_data[i] = new Array(width);
-        for(var j = 0; j<width; j++){
-            map_data[i][j] = 'x';
-        }
-    }
-
-    for(i = 0; i < tiles.length; i++){
-        if(tiles[i].delivery){
-            map_data[tiles[i].y][tiles[i].x] = 'd';
-        } else {
-            map_data[tiles[i].y][tiles[i].x] = 'o';
-        }
-    }
+    tiles.forEach(function (tile) {
+        map_data[tile.y][tile.x] = (tile.delivery ? "d" : "o");
+    });
 }
 
 
@@ -66,11 +53,11 @@ function initializeMapKnowledge(width, height, tiles) {
  */
 function isTile(x,y){
     if(x < 0 || x > width_data || y < 0 || y > height_data){
-        console.log("Out of map boundaries.")
+        console.log("Out of map boundaries.");
         return false;
     }
 
-    return map_data[y][x] === 'o' || map_data[y][x] === 'd';
+    return map_data[y][x] === "o" || map_data[y][x] === "d";
 }
 
 
@@ -82,11 +69,11 @@ function isTile(x,y){
  */
 function isDelivery(x,y){
     if(x < 0 || x > width_data || y < 0 || y > height_data){
-        console.log("Out of map boundaries.")
+        console.log("Out of map boundaries.");
         return false;
     }
 
-    return map_data[y][x] === 'd';
+    return map_data[y][x] === "d";
 }
 
 
@@ -98,18 +85,18 @@ function isDelivery(x,y){
  */
 function isWall(x,y){
     if(x < 0 || x > width_data || y < 0 || y > height_data){
-        console.log("Out of map boundaries.")
+        console.log("Out of map boundaries.");
         return false;
     }
 
-    return map_data[y][x] === 'x';
+    return map_data[y][x] === "x";
 }
 
 
-export default {
+export default Object.freeze({
     getMapKnowledge,
     initializeMapKnowledge,
     isTile,
     isDelivery,
     isWall
-}
+});

@@ -1,16 +1,36 @@
 /**
  * current beliefs about agents.
- * @type {[{id: string, name: string, position: { x: number, y: number }, score: number}]}
+ * @type {[{id: string, name: string, position: { x: number, y: number }, score: number, direction: string}]}
  */
 let agent_data = [];
 
 
 /**
  * retrieve all the current beliefs on agents.
- * @returns {[{id: string, name: string, position: { x: number, y: number }, score: number}]}
+ * @returns {[{id: string, name: string, position: { x: number, y: number }, score: number, direction: string}]}
  */
 function getAllAgentsBeliefs() {
     return agent_data;
+}
+
+
+/**
+ * retrieve the current belief of an agent by id.
+ * @returns {{id: string, name: string, position: {x: number, y: number}, score: number, direction: string} | undefined}
+ * @param {string} id
+ */
+function getAgentBeliefsById(id){
+    return agent_data.find((v) => v.id === id);
+}
+
+
+/**
+ * retrieve the current belief of an agent by name.
+ * @returns {{id: string, name: string, position: {x: number, y: number}, score: number, direction: string} | undefined}
+ * @param {string} name
+ */
+function getAgentBeliefsByName(name){
+    return agent_data.find((v) => v.name === name);
 }
 
 
@@ -26,7 +46,8 @@ function setAgentBeliefs(agent) {
             x : agent.x,
             y : agent.y
         },
-        score : agent.score
+        score : agent.score,
+        direction: "unknown"
     });
 }
 
@@ -43,9 +64,13 @@ function updateAgentBeliefs(agent){
         return;
     }
 
-    // let old_belief = agent_data[i];
+    let old_belief = agent_data[i];
 
-    // do stuff? TODO
+    if(old_belief.position.x !== agent.x){
+        agent_data[i].direction = old_belief.position.x < agent.x ? "left" : "right"
+    } else if (old_belief.position.y !== agent.y){
+        agent_data[i].direction = old_belief.position.y < agent.y ? "down" : "up"
+    }
 
     agent_data[i].position.x = agent.x;
     agent_data[i].position.y = agent.y;
@@ -67,7 +92,9 @@ function updateAgentsBeliefs(agents){
 
 
 export default Object.freeze({
+    getAgentBeliefsById,
     getAllAgentsBeliefs,
+    getAgentBeliefsByName,
     updateAgentsBeliefs,
     updateAgentBeliefs,
     setAgentBeliefs

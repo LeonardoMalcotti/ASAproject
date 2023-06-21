@@ -1,8 +1,8 @@
 import { DeliverooApi } from "@unitn-asa/deliveroo-js-client";
 import config from "../config.js";
-import AgentsBeliefs from "./AgentsBeliefs.js";
-import MapKnowledge from "./MapKnowledge.js";
-import ParcelBeliefs from "./ParcelBeliefs.js";
+import AgentsBeliefs from "./BeliefsModules/AgentsBeliefs.js";
+import MapKnowledge from "./BeliefsModules/MapKnowledge.js";
+import ParcelBeliefs from "./BeliefsModules/ParcelBeliefs.js";
 
 
 const client = new DeliverooApi( config.host, config.token );
@@ -19,6 +19,7 @@ client.on("disconnect", () => {
 // Beliefs
 //
 
+
 // at the start read map values and store them as belief
 client.onMap(function (width, height, tiles){
 	MapKnowledge.initializeMapKnowledge(width,height,tiles);
@@ -26,7 +27,7 @@ client.onMap(function (width, height, tiles){
 
 client.onAgentsSensing(function (agents){
 	AgentsBeliefs.updateAgentsBeliefs(agents);
-	console.log(AgentsBeliefs.getAllAgentsBeliefs());
+	console.log(AgentsBeliefs.getAgentBeliefsByName("aaa").direction);
 });
 
 client.onParcelsSensing(function (parcels){

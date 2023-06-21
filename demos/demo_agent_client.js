@@ -1,4 +1,4 @@
-import { default as config } from "./config.js";
+import { default as config } from "../config.js";
 import { DeliverooApi, timer } from "@unitn-asa/deliveroo-js-client";
 
 const client = new DeliverooApi( config.host, config.token )

@@ -1,4 +1,4 @@
-import { default as config } from "./config.js";
+import { default as config } from "../config.js";
 import { io } from "socket.io-client";
 
 var socket = io( config.host, {

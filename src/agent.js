@@ -5,7 +5,7 @@ import MapKnowledge from "./MapKnowledge.js";
 import ParcelBeliefs from "./ParcelBeliefs.js";
 
 
-const client = new DeliverooApi( config.host, config.token )
+const client = new DeliverooApi( config.host, config.token );
 
 client.on("connect", () => {
 	console.log( "socket connect", client.socket.id );
@@ -26,15 +26,17 @@ client.onMap(function (width, height, tiles){
 
 client.onAgentsSensing(function (agents){
 	AgentsBeliefs.updateAgentsBeliefs(agents);
+	console.log(AgentsBeliefs.getAllAgentsBeliefs());
 });
 
 client.onParcelsSensing(function (parcels){
 	ParcelBeliefs.updateParcelsBeliefs(parcels);
+	//console.log(ParcelBeliefs.getAllParcelsBeliefs());
 });
 
-client.onTile((tile)=> console.log(tile));
+client.onTile((x,y)=> console.log("tile " + x + " " + y));
 
-client.onNotTile((tile)=> console.log(tile));
+client.onNotTile((x,y)=> console.log("not tile " + x + " " + y));
 
 //let directions = [ "up", "right", "down", "left" ];
 

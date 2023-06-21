@@ -35,13 +35,17 @@ function initializeMapKnowledge(width, height, tiles) {
 
     // so, fill() it's terrible to create a multidimensional array
     // https://stackoverflow.com/questions/9979560/javascript-multidimensional-array-updating-specific-element
+    // but it's apparently necessary if you want to use map to initialize a matrix
+    // which is seemingly the only good way counting js style rules (jshint, jslint)
 
     // initialize the matrix using width and height
-    map_data = new Array(height).map(() => new Array(width).map(() => "x"));
+    map_data = new Array(height).fill([]).map(() => new Array(width).fill("").map(() => "x"));
 
     tiles.forEach(function (tile) {
         map_data[tile.y][tile.x] = (tile.delivery ? "d" : "o");
     });
+
+    map_data.forEach((row) => console.log(row.join("  ")));
 }
 
 

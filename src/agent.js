@@ -15,6 +15,10 @@ client.on("disconnect", () => {
 	console.log( "socket disconnect", client.socket.id );
 });
 
+client.onConfig((config) => {
+	console.log(config);
+});
+
 //
 // Beliefs
 //
@@ -26,14 +30,17 @@ client.onMap(function (width, height, tiles){
 });
 
 client.onAgentsSensing(function (agents){
+	//console.log("agent sensing");
 	AgentsBeliefs.updateAgentsBeliefs(agents);
-	console.log(AgentsBeliefs.getAgentBeliefsByName("aaa").direction);
+	//console.log(AgentsBeliefs.getAgentBeliefsByName("aaa").direction);
 });
 
 client.onParcelsSensing(function (parcels){
 	ParcelBeliefs.updateParcelsBeliefs(parcels);
+	//console.log("parcel sensing");
 	//console.log(ParcelBeliefs.getAllParcelsBeliefs());
 });
+
 
 client.onTile((x,y)=> console.log("tile " + x + " " + y));
 
@@ -43,6 +50,10 @@ client.onNotTile((x,y)=> console.log("not tile " + x + " " + y));
 
 async function agentLoop () {
 
+	await client.move("left");
+	await client.move("left");
+	await client.move("left");
+	await client.move("left");
 
 }
 

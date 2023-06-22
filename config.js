@@ -2,7 +2,7 @@ const config = {
 
     host: "http://localhost:8080", // https://deliveroojs.onrender.com"
 
-    token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEwZDNjNDJkNzk2IiwibmFtZSI6ImFhYSIsImlhdCI6MTY4NzI2OTcxMH0.2JevdkiqqbuUQ78D4rqBjaGz4ZFz7yWbIQfu7R7Pl-8'
+    token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjBkM2M0MmQ3OTY2IiwibmFtZSI6ImFhYSIsImlhdCI6MTY4NzI2OTc0MH0.NoOPbsm1LD2kUnlV4hyIiOEN-XXXOB-OcflKKGWW1uE'
 
 }
 

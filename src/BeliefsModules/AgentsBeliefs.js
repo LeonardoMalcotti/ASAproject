@@ -1,6 +1,6 @@
 /**
  * current beliefs about agents.
- * @type {[{id: string, name: string, position: { x: number, y: number }, score: number, direction: string}]}
+ * @type {[{id: string, name: string, position: { x: number, y: number }, score: number, direction: string, clock: number}]}
  */
 let agent_data = [];
 
@@ -67,9 +67,9 @@ function updateAgentBeliefs(agent){
     let old_belief = agent_data[i];
 
     if(old_belief.position.x !== agent.x){
-        agent_data[i].direction = old_belief.position.x < agent.x ? "left" : "right"
+        agent_data[i].direction = old_belief.position.x < agent.x ? "left" : "right";
     } else if (old_belief.position.y !== agent.y){
-        agent_data[i].direction = old_belief.position.y < agent.y ? "down" : "up"
+        agent_data[i].direction = old_belief.position.y < agent.y ? "down" : "up";
     }
 
     agent_data[i].position.x = agent.x;

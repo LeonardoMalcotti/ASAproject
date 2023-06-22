@@ -1,6 +1,6 @@
 /**
  * History (up to some point) of agents beliefs
- * @type {{id:string, history:{position: { x: number, y: number }, score: number, direction: string}[]}[] }
+ * @type {{id:string, history:{position: { x: number, y: number }, score: number, direction: string, time: number, probability: number}[]}[] }
  */
 let agents_history = [];
 
@@ -9,7 +9,7 @@ let limit = 5;
 
 /**
  * get all the history data on all the agents.
- * @returns {{id: string, history: {position: {x: number, y: number}, score: number, direction: string}[]}[]}
+ * @returns {{id: string, history: {position: {x: number, y: number}, score: number, direction: string,time: number, probability: number}[]}[]}
  */
 function getAllAgentsHistory() {
     return agents_history;
@@ -19,7 +19,7 @@ function getAllAgentsHistory() {
 /**
  * get the history data on a specific agent by id.
  * @param {string} id
- * @returns {{id: string, history: {position: {x: number, y: number}, score: number, direction: string}[]} | undefined}
+ * @returns {{id: string, history: {position: {x: number, y: number}, score: number, direction: string, time: number, probability: number}[]} | undefined}
  */
 function getHistoryOfAgentById(id){
     return agents_history.find((v) => v.id === id);
@@ -27,7 +27,7 @@ function getHistoryOfAgentById(id){
 
 /**
  * add a new agent to the beliefs' history.
- * @param {{id: string, name: string, position: { x: number, y: number }, score: number, direction: string}} agent
+ * @param {{id: string, name: string, position: { x: number, y: number }, score: number, direction: string, time: number, probability: number}} agent
  */
 function addAgentHistory(agent) {
     agents_history.push({
@@ -42,7 +42,7 @@ function addAgentHistory(agent) {
 
 /**
  * update the beliefs' history of a single agent.
- * @param {{id: string, name: string, position: { x: number, y: number }, score: number, direction: string}} agent
+ * @param {{id: string, name: string, position: { x: number, y: number }, score: number, direction: string, time: number, probability: number}} agent
  */
 function updateAgentHistory(agent) {
     let i = agents_history.findIndex((v) => v.id === agent.id);
@@ -65,7 +65,7 @@ function updateAgentHistory(agent) {
 
 /**
  * update the beliefs' history of the agents passed as parameter.
- * @param {{id: string, name: string, position: { x: number, y: number }, score: number, direction: string}[]} agents
+ * @param {{id: string, name: string, position: { x: number, y: number }, score: number, direction: string, time: number, probability: number}[]} agents
  */
 function updateAgentsHistory(agents){
     if(!Array.isArray(agents)){

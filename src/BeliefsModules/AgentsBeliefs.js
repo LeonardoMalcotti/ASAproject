@@ -1,13 +1,13 @@
 /**
  * current beliefs about agents.
- * @type {[{id: string, name: string, position: { x: number, y: number }, score: number, direction: string, clock: number}]}
+ * @type {[{id: string, name: string, position: { x: number, y: number }, score: number, direction: string, time: number, probability: number}]}
  */
 let agent_data = [];
 
 
 /**
  * retrieve all the current beliefs on agents.
- * @returns {[{id: string, name: string, position: { x: number, y: number }, score: number, direction: string}]}
+ * @returns {[{id: string, name: string, position: { x: number, y: number }, score: number, direction: string, time: number, probability: number}]}
  */
 function getAllAgentsBeliefs() {
     return agent_data;
@@ -16,7 +16,7 @@ function getAllAgentsBeliefs() {
 
 /**
  * retrieve the current belief of an agent by id.
- * @returns {{id: string, name: string, position: {x: number, y: number}, score: number, direction: string} | undefined}
+ * @returns {{id: string, name: string, position: { x: number, y: number }, score: number, direction: string, time: number, probability: number} | undefined}
  * @param {string} id
  */
 function getAgentBeliefsById(id){
@@ -26,7 +26,7 @@ function getAgentBeliefsById(id){
 
 /**
  * retrieve the current belief of an agent by name.
- * @returns {{id: string, name: string, position: {x: number, y: number}, score: number, direction: string} | undefined}
+ * @returns {{id: string, name: string, position: { x: number, y: number }, score: number, direction: string, time: number, probability: number} | undefined}
  * @param {string} name
  */
 function getAgentBeliefsByName(name){
@@ -47,7 +47,9 @@ function setAgentBeliefs(agent) {
             y : agent.y
         },
         score : agent.score,
-        direction: "unknown"
+        direction: "unknown",
+        time: 0,
+        probability: 1
     });
 }
 
@@ -55,8 +57,9 @@ function setAgentBeliefs(agent) {
 /**
  *  update the beliefs of a single agent passed as parameter.
  *  @param {{id: string, name: string, x: number, y: number, score: number}} agent
+ * @param {number} probability
  */
-function updateAgentBeliefs(agent){
+function updateAgentBeliefs(agent, probability){
     let i = agent_data.findIndex((v) => v.id === agent.id);
 
     if(i === -1){
@@ -75,6 +78,7 @@ function updateAgentBeliefs(agent){
     agent_data[i].position.x = agent.x;
     agent_data[i].position.y = agent.y;
     agent_data[i].score = agent.score;
+    agent_data[i].probability = probability;
 }
 
 
@@ -84,10 +88,10 @@ function updateAgentBeliefs(agent){
  */
 function updateAgentsBeliefs(agents){
     if(!Array.isArray(agents)){
-        updateAgentBeliefs(agents);
+        updateAgentBeliefs(agents, 1);
         return;
     }
-    agents.forEach(updateAgentBeliefs);
+    agents.forEach((a) => updateAgentBeliefs(a,1));
 }
 
 

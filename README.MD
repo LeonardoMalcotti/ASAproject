@@ -35,7 +35,7 @@ Is an aggregator module, that works as a middleware between the *Belief Modules*
 It exposes CRUD functions similar to the one exposed by the *Belief Module* connected but apply additional logic to
 the data in input to adjust the new beliefs and to update multiple modules at the same time.
 
-![](/home/leo/Documents/ASA/ASAproject/documentation/beliefs_management_architecture.png)
+![](./documentation/beliefs_management_architecture.png)
 
 
 ### Belief Module

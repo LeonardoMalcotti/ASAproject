@@ -1,13 +1,17 @@
+import AgentBelief from "./Models/AgentBeliefModel.js";
+
+//{[{id: string, name: string, position: { x: number, y: number }, score: number, direction: string, time: number, probability: number}]}
+
 /**
  * current beliefs about agents.
- * @type {[{id: string, name: string, position: { x: number, y: number }, score: number, direction: string, time: number, probability: number}]}
+ * @type {AgentBelief[]}
  */
 let agent_data = [];
 
 
 /**
  * retrieve all the current beliefs on agents.
- * @returns {[{id: string, name: string, position: { x: number, y: number }, score: number, direction: string, time: number, probability: number}]}
+ * @returns {AgentBelief[]}
  */
 function getAllAgentsBeliefs() {
     return agent_data;
@@ -16,7 +20,7 @@ function getAllAgentsBeliefs() {
 
 /**
  * retrieve the current belief of an agent by id.
- * @returns {{id: string, name: string, position: { x: number, y: number }, score: number, direction: string, time: number, probability: number} | undefined}
+ * @returns {AgentBelief}
  * @param {string} id
  */
 function getAgentBeliefsById(id){
@@ -26,7 +30,7 @@ function getAgentBeliefsById(id){
 
 /**
  * retrieve the current belief of an agent by name.
- * @returns {{id: string, name: string, position: { x: number, y: number }, score: number, direction: string, time: number, probability: number} | undefined}
+ * @returns {AgentBelief}
  * @param {string} name
  */
 function getAgentBeliefsByName(name){
@@ -39,18 +43,16 @@ function getAgentBeliefsByName(name){
  *  @param {{id: string, name: string, x: number, y: number, score: number}} agent
  */
 function setAgentBeliefs(agent) {
-    agent_data.push({
-        id : agent.id,
-        name : agent.name,
-        position : {
-            x : agent.x,
-            y : agent.y
-        },
-        score : agent.score,
-        direction: "unknown",
-        time: 0,
-        probability: 1
-    });
+    agent_data.push(new AgentBelief(
+        agent.id,
+        agent.name,
+        agent.x,
+        agent.y,
+        agent.score,
+        "unknown",
+        0,
+        1)
+    );
 }
 
 

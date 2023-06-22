@@ -1,13 +1,15 @@
+import ParcelBelief from "./Models/ParcelBeliefModel.js";
+
 /**
  * current beliefs about parcels.
- * @type {{id: string, position: {x: number, y: number}, carriedBy: string, reward: number, time: number, probability: number}[]}
+ * @type {ParcelBelief[]}
  */
 let parcels_data = [];
 
 
 /**
  * retrieve all the current beliefs on parcels.
- * @returns {{id: string, position: {x: number, y: number}, carriedBy: string, reward: number, time: number, probability: number}[]}
+ * @returns {ParcelBelief[]}
  */
 function getAllParcelsBeliefs(){
     return parcels_data;
@@ -19,17 +21,7 @@ function getAllParcelsBeliefs(){
  * @param {{id: string, x: number, y: number, carriedBy: string, reward: number}} parcel
  */
 function setParcelBelief(parcel){
-    parcels_data.push({
-        id : parcel.id,
-        position : {
-            x: parcel.x,
-            y: parcel.y
-        },
-        carriedBy : parcel.carriedBy,
-        reward : parcel.reward,
-        time : 0,
-        probability: 1
-    });
+    parcels_data.push(new ParcelBelief(parcel.id,parcel.x,parcel.y,parcel.carriedBy,parcel.reward,0,1));
 }
 
 /**
